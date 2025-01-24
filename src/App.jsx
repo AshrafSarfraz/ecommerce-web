@@ -12,8 +12,7 @@ export default function App() {
   <MyState>
   <Router>
     <Routes>
-      <Route path="/" element={<TailwindCss/>} />
-      <Route path="/Home" element={<Home/>} />
+      <Route path="/" element={<Home/>} />
       <Route path="/order" element={<Order/>} />
       <Route path="/payment" element={<Payment/>} />
       <Route path="/*" element={<NoPage/>} />
