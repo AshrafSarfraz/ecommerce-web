@@ -6,3 +6,4 @@ export default function NoPage() {
     <Layout>NoPage</Layout>
   )
 }
+    
