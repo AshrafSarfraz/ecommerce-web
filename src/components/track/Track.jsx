@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import myContext from '../../../context-api/MyContext'
+import myContext from '../../context-api/MyContext'
 
 
 function Track() {
     const context = useContext(myContext)
-    const { toggleMode, mode } = context
+    const { mode } = context
     return (
         <div>
             <section className="text-gray-600 body-font">

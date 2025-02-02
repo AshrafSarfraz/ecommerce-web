@@ -5,7 +5,8 @@ import Order from './screens/order/Order'
 import NoPage from './screens/no-page/NoPage'
 import Payment from './screens/payment/Payment'
 import MyState from './context-api/MyState';
-import TailwindCss from './screens/TailwindCss';
+import Login from './screens/admin/login/Login';
+import Signup from './screens/admin/sign-up/SignUp';
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
   <Router>
     <Routes>
       <Route path="/" element={<Home/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/signup" element={<Signup/>} />
       <Route path="/order" element={<Order/>} />
       <Route path="/payment" element={<Payment/>} />
       <Route path="/*" element={<NoPage/>} />
