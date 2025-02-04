@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import {FaUserTie } from 'react-icons/fa';
 import myContext from '../../../context-api/MyContext';
 import Layout from '../../../components/layout/Layout';
+import DashboardTab from './DashboardTab';
 
 
 function Dashboard() {
@@ -51,6 +52,7 @@ function Dashboard() {
                 </div>
             </div>
         </section>
+       <DashboardTab/>
     </Layout>
   )
 }

@@ -15,6 +15,7 @@ import { store } from './redux/Store';
 import AddProduct from './screens/admin/pages/Addproduct';
 import UpdateProduct from './screens/admin/pages/UpdateProduct';
 
+
 export default function App() {
   return (
   <Provider store={store}>
