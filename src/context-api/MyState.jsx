@@ -8,6 +8,9 @@ import {
   onSnapshot,
   orderBy,
   query,
+  setDoc,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function MyState({ children }) {
   const [mode, setMode] = useState("light");
   const [loading, setLoading] = useState(false);
-   
+
   // Toggle Switch Function
   const toggleMode = () => {
     if (mode === "light") {
@@ -26,7 +29,7 @@ export default function MyState({ children }) {
       document.body.style.backgroundColor = "white";
     }
   };
- 
+
   // Add Product
   const [products, setProducts] = useState({
     title: null,
@@ -57,8 +60,10 @@ export default function MyState({ children }) {
     try {
       await addDoc(productRef, products);
       toast.success("Product Add successfully");
-       getProductData();
-      // closeModal();
+      setTimeout(() => {
+        window.location.href = "./dashboard";
+      }, [800]);
+      getProductData();
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -93,54 +98,61 @@ export default function MyState({ children }) {
   };
 
   const edithandle = (item) => {
-    setProducts(item)
-  }
-  
-     // update product
+    setProducts(item);
+  };
+
+  // update product
   const updateProduct = async (item) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      await setDoc(doc(fireDb, "products", products.id), products);
-      toast.success("Product Updated successfully")
+      await setDoc(doc(fireDB, "products", products.id), products);
+      toast.success("Product Updated successfully");
       getProductData();
-      setLoading(false)
-      window.location.href = '/dashboard'
+      setLoading(false);
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, [800]);
     } catch (error) {
-      setLoading(false)
-      console.log(error)
+      setLoading(false);
+      console.log(error);
     }
-    setProducts("")
-  }
+    setProducts("");
+  };
 
-    // Delete Product
+  // Delete Product
   const deleteProduct = async (item) => {
-
     try {
-      setLoading(true)
-      await deleteDoc(doc(fireDb, "products", item.id));
-      toast.success('Product Deleted successfully')
-      setLoading(false)
-      getProductData()
+      setLoading(true);
+      await deleteDoc(doc(fireDB, "products", item.id));
+      toast.success("Product Deleted successfully");
+      setLoading(false);
+      getProductData();
     } catch (error) {
       // toast.success('Product Deleted Falied')
-      setLoading(false)
+      setLoading(false);
     }
-  }
-
-
-
-
-
-
+  };
 
   useEffect(() => {
     getProductData();
   }, []);
 
-
-
   return (
-    <myContext.Provider value={{ mode, toggleMode, loading, setLoading,  products,setProducts, product, addProduct  }}>
+    <myContext.Provider
+      value={{
+        mode,
+        toggleMode,
+        loading,
+        setLoading,
+        products,
+        setProducts,
+        product,
+        addProduct,
+        edithandle,
+        updateProduct,
+        deleteProduct,
+      }}
+    >
       {children}
       <ToastContainer />
     </myContext.Provider>
