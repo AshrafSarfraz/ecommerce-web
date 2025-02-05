@@ -9,6 +9,7 @@ import myContext from '../../../context-api/MyContext';
 function DashboardTab() {
     const context = useContext(myContext)
     const { mode, product } = context
+    console.log(product)
     let [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
