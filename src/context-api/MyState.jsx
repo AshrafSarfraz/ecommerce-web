@@ -96,7 +96,7 @@ export default function MyState({ children }) {
       setLoading(false);
     }
   };
-
+   
   const edithandle = (item) => {
     setProducts(item);
   };
@@ -135,7 +135,34 @@ export default function MyState({ children }) {
 
   useEffect(() => {
     getProductData();
+    getUserData();
   }, []);
+
+// Get User Details
+const [Users, setUsers] = useState([]);
+
+const getUserData = async () => {
+  setLoading(true);
+  try {
+    const q = query(collection(fireDB, "users"), orderBy("time"));
+    
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      const usersArray = QuerySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setUsers(usersArray);
+      setLoading(false);
+    });
+
+    return unsubscribe; // Proper cleanup function
+  } catch (error) {
+    console.log("Error fetching users:", error);
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <myContext.Provider
@@ -151,6 +178,9 @@ export default function MyState({ children }) {
         edithandle,
         updateProduct,
         deleteProduct,
+        Users,
+        setUsers,
+        getUserData
       }}
     >
       {children}

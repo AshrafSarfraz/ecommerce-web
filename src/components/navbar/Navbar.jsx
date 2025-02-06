@@ -7,12 +7,16 @@ import { RxCross2 } from "react-icons/rx";
 import myContext from "../../context-api/MyContext";
 import myCountry from "../../assets//images/Flag.jpg";
 import myProfile from "../../assets//images/img1.jpg";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const Cart = useSelector((state) => state.cart);
+  
   const context = useContext(myContext);
   const { toggleMode, mode } = context;
   const user = JSON.parse(localStorage.getItem("user"));
+  
   const Logout=()=>{
     localStorage.removeItem("user");
     window.location.href='./login';
@@ -302,7 +306,7 @@ export default function Navbar() {
                       className="ml-2 text-sm font-medium text-gray-700 group-"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      0
+                      {Cart.length}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>

@@ -10,15 +10,13 @@ import Signup from './screens/admin/sign-up/SignUp';
 import ProductInfo from './screens/product-info/ProductInfo';
 import Cart from './screens/cart/Cart';
 import Dashboard from './screens/admin/dashboard/Dashboard';
-import { Provider } from 'react-redux';
-import { store } from './redux/Store';
 import AddProduct from './screens/admin/pages/Addproduct';
 import UpdateProduct from './screens/admin/pages/UpdateProduct';
 
 
 export default function App() {
   return (
-  <Provider store={store}>
+
   <MyState>
   <Router>
     <Routes>
@@ -36,7 +34,6 @@ export default function App() {
     </Routes>
   </Router>
   </MyState>
-  </Provider>
   )
 }
 
